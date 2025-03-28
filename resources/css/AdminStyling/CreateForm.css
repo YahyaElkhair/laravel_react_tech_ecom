@@ -1,0 +1,126 @@
+.form-container {
+    width: 100%;
+    max-width: 10010px;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: larger;
+    font-weight: 700;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+input{
+    border-radius: 10px !important;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button ,input::-webkit-inner-spin-button {
+    display: none;
+}
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #6c63ff;
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"] {
+    background-color: #6c63ff;
+    color: #fff;
+}
+
+button[type="submit"]:hover {
+    background-color: #5851db;
+}
+
+.reset-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.reset-btn:hover {
+    background-color: #aaa;
+}
+
+.radio-container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 25px;
+    position: relative;
+}
+
+/* Product specifications style  */
+
+
+.specifications_container{
+    border: 1px solid ;
+    width: 100%;
+    height: fit-content;
+    padding: 5px;
+    max-width: 10010px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.specifications_container > input{
+    width: 130px;
+    height: 25px;
+    border-radius: 5px !important;
+    padding: 5px !important;
+    font-size: small;
+    font-weight: 600;
+}

@@ -1,0 +1,16 @@
+@import url('../global.css');
+
+
+main{
+    width: 100vw;
+    height: fit-content;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 160px;
+    overflow-x: auto;
+    position: relative;
+
+}

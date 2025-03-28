@@ -1,0 +1,122 @@
+.main_products_containers{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    border: 1px solid;
+}
+
+
+
+
+.b_p_container{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.b_p_container p{
+    position: absolute;
+    top: -45px;
+    left: 0;
+    font-size: larger ;
+    font-family: var(--larg_title);
+    font-weight: 600;
+    width: 100%;
+    padding: 7px;
+    color: #fff;
+}
+
+p#p1{
+    background-color: #A0C878;
+
+}
+p#p2{
+    background-color: #E52020;
+    
+}
+
+p#p3{
+    background-color: #143D60;
+    
+}
+
+
+p#p4{
+    background-color: #27667B;
+    
+}
+p#p5{
+    background-color: #e4f888;
+    
+}
+p#p6{
+    background-color: #fcd041;
+    
+}
+
+
+
+
+
+
+
+
+div.random_prod_container{
+    width: 100vw; /* Allow the width to expand based on content */
+    white-space: nowrap;/* Ensure no line breaks */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 50px;
+    overflow-x: auto;
+    background-color: transparent;
+    scroll-behavior: smooth;
+    position: relative;
+
+}
+
+div.random_prod_container::-webkit-scrollbar{
+    display: none;
+}
+
+.left_scroll_btn , .right_scroll_btn , .up_scroll_btn{
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+
+}
+.up_scroll_btn{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: #E52020;
+    font-size: 25px;
+}
+.left_scroll_btn{
+    left: 10px;
+}
+
+.right_scroll_btn{
+    right: 25px;
+}
+
+

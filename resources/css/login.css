@@ -1,0 +1,91 @@
+.social-auth-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.google-auth{
+    background-color: #F8F8FB;
+    width: 100%;
+    height: fit-content;
+    padding: 1.5%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    border-radius: 7px;
+}
+
+.google-auth img{
+    width: 25px;
+    height: 25px;
+}
+
+.google-auth-link , .auth-separator{
+    color: #0f172a;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: medium;
+}
+.auth-separator{
+    color: #fff;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.auth-separator::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 44%;
+    height: 2px;
+    background-color: #fff;
+}
+
+.auth-separator::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 44%;
+    height: 2px;
+    background-color: #fff;
+}
+
+.input-label{
+    color: #fff;
+}
+
+.forgot-pass-link{
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.login-btn{
+    width: 70px !important;
+    height: 27px !important;
+    margin-left: 0 !important;
+    text-align: center !important;
+}
+
+.l-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-box form .login-inp{
+    height: 30px;
+    font-size: 13px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

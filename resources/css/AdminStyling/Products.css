@@ -1,0 +1,60 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
+
+
+
+table caption{
+    text-align: left;
+}
+
+
+
+
+
+
+.prod_img{
+    width: 100px;
+    height: 100px;
+}
+.prod_imgs_ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 290px;
+
+}
+.prod_vid_td{
+    height: 200px;
+    width: 200px;
+}
+video{
+    height: 200px;
+    width: 200px;
+}
+
+img , video{
+    cursor: pointer;
+}
+
+
+.sp_ul{
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.sp_container{
+    width: 300px;
+    display: flex;
+    gap: 11px;
+
+
+}
+
+
+.sp_container span:first-child{
+    color: #4DA3FF;
+    text-decoration: underline;
+    font-weight: 600;
+}

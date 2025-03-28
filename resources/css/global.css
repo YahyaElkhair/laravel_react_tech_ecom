@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+    --primary: #3674B5;
+    --secondary: #578FCA;
+    --c3: #A1E3F9;
+    --c4: #D1F8EF;
+    --hover_c1: #C5FF95;
+    --nav_icons_c1: #3A6D8C;
+    --prices_color: #CA8057;
+    --discount_color: #fbb72c;
+    --red_color: #D70654;
+    
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    /* Example Usage: Great for body text, buttons, and navigation links. */
+    --body: 'Roboto', sans-serif;
+
+    /* Example Usage: Ideal for headers, logo text, and call-to-action buttons. */
+    --headers: 'Montserrat', sans-serif;
+
+    /* Example Usage: Great for large headings, product titles, and descriptions. */
+    --larg_title: 'Poppins', sans-serif;
+
+
+    --input_weight: 500;
+
+
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--body);
+}
+  
+body{
+    background: var(--light);
+    color: var(--dark);
+    overflow-x: auto;
+
+}
+
+.custom-radio {
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 18px !important;
+  }
