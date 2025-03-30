@@ -22,7 +22,7 @@ import googleLogo from 'PUBLIC/Images/google.png'
 function NavBar(){
     const {status , canResetPassword , auth} = usePage().props;
 
-    console.log(auth)
+
     // sidebar open close
 
     const [navLinksLeftPosition , setNavLinksLeftPosition] = useState('-100%');
@@ -166,7 +166,7 @@ function NavBar(){
 
 
 
-                    {auth.user && 
+                    {auth.user &&
                         <div className="left-nav-box">
                                 <Link href={route('shop.index')} className='profile-link'>Profile</Link>
                                 <Link method='post' href={route('logout')} className='profile-link'>Logout</Link>

@@ -6,6 +6,8 @@ use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Closure;
+use Inertia\Inertia;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -23,6 +25,9 @@ class HandleInertiaRequests extends Middleware
     {
         return parent::version($request);
     }
+
+
+
 
     /**
      * Define the props that are shared by default.
@@ -42,7 +47,6 @@ class HandleInertiaRequests extends Middleware
                     'role' => $request->user()->role,
 
                 ] : null,
-                // 'is_admin' => fn () => $request->user()?->isAdmin(), // Custom method
             ],
             
             // Route helper and current location

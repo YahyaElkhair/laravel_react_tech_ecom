@@ -1,14 +1,12 @@
 <?php
 
-use Inertia\Inertia;
+
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SocialiteController;
 
@@ -43,18 +41,19 @@ use App\Http\Controllers\SocialiteController;
 
 
 
-
+// google auth routing
 Route::controller(SocialiteController::class)->group(function(){
     Route::get('auth/google' , 'googleLogin')->name('auth.google');
     Route::get('auth/google-callback' , 'googleAuth')->name("googleCallBack");
 });
 
-Route::middleware('auth')->group(function () {
-    // Admin routing
+
+// Admin routing
+Route::middleware(['auth' , 'role:admin'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
 
-        // admin
+        // admin home
         Route::controller(AdminController::class)->group(function(){
             Route::get('/' , 'index')->name('index');
         });
@@ -79,52 +78,37 @@ Route::middleware('auth')->group(function () {
 
 
 
-
-
-
-
-
-
-
     // Profile routing
-    Route::controller(ProfileController::class)->group(function (){
-        Route::get('/profile', 'edit')->name('profile.edit');
-        Route::patch('/profile', 'update')->name('profile.update');
-        Route::delete('/profile', 'destroy')->name('profile.destroy');
-    });
-
-
-
-
-
-
-
-
-
-
-
+    // Route::controller(ProfileController::class)->group(function (){
+    //     Route::get('/profile', 'edit')->name('profile.edit');
+    //     Route::patch('/profile', 'update')->name('profile.update');
+    //     Route::delete('/profile', 'destroy')->name('profile.destroy');
+    // });
 
 });
 
 
 
 
-    // Home Page
+// store routing
+
+Route::middleware( ['role:customer'])->name('shop.')->group(function () {
 
     Route::controller(ShopController::class)->group(function(){
-        
 
-        Route::get('/' , 'index')->name('shop.index');
-        Route::get('product' , 'productPage')->name('shop.product')->whereNumber('id');;
+        Route::get('/' , 'index')->name('index');
+        Route::get('product' , 'productPage')->name('product')->whereNumber('id');
+    
 
         Route::middleware(['auth'])->group(function(){
-            Route::get('dashboard' , 'dashboard')->name('shop.dashboard');
-            
+            Route::get('dashboard' , 'dashboard')->name('dashboard');
+
         });
-
-
+    
+    
     });
 
+});
 
 
 
@@ -139,4 +123,3 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
-// drop DATABASE laravel_react_tech_ecom

@@ -57,5 +57,19 @@ class User extends Authenticatable
     }
 
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+    public function isCustomer()
+    {
+        return $this->role === 'customer';
+    }
+
+    public function isSeller()
+    {
+        return $this->role === 'seller';
+    }
+
     
 }

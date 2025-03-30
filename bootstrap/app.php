@@ -1,8 +1,14 @@
 <?php
 
+
+use Inertia\Inertia;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request; 
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+
+
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,13 +17,28 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->web(append: [
-            \App\Http\Middleware\HandleInertiaRequests::class,
-            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
-        ]);
+        $middleware->web(
+            append: [
+                \App\Http\Middleware\HandleInertiaRequests::class,
+                \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            ],
 
-        //
+    
+        );
+        $middleware->alias(
+            [
+                'role' => \App\Http\Middleware\RoleMiddleware::class,
+            ]
+        );
+
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        
+        $exceptions->respond(function (Response $response, Throwable $e, Request $request) {
+            return Inertia::render('Errors', [
+                'status' => $response->getStatusCode(),
+                'message' => $e->getMessage(),
+            ]);
+        });
     })->create();

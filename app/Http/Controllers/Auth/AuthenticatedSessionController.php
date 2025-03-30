@@ -32,6 +32,18 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        
+        if($request->user()->isAdmin()) {
+            return redirect()->intended(route('admin.index', absolute: false));
+        }
+        if($request->user()->isCustomer()) {
+            return redirect()->intended(route('shop.index', absolute: false));
+        }
+
+        if($request->user()->isSeller()) {
+            return redirect()->intended(route('shop.index', absolute: false));
+        }
+
 
         return redirect()->intended(route('shop.index', absolute: false));
     }
