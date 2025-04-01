@@ -11,7 +11,7 @@ import { Head, Link } from "@inertiajs/react";
 
 
 function Product({product}){
-    
+    console.log(product);
     let sp_list = product.specifications.map((s , i ) =>{
 
         let keys = Object.keys(s);
@@ -51,7 +51,7 @@ function Product({product}){
         return (
             <tr key={product.name}>
                 <td>{product.id}</td>
-                <td>{product.created_by.email}</td>
+                <td>{product.seller_id.email}</td>
                 <td>{product.name}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>

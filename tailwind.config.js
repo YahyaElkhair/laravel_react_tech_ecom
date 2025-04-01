@@ -34,7 +34,15 @@ module.exports = {
             boxShadow: {
                 'custom': '0 2px 8px 0 rgba(99, 99, 99, 0.2)'
             },
-            
+            colors: {
+                primary: '#3B82F6',
+                secondary: '#64748B',
+                success: '#10B981',
+                danger: '#EF4444',
+            },
+            boxShadow: {
+                card: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            },
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },

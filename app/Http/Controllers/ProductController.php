@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Exception;
 use Inertia\Inertia;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\ProductCategories;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateProductRequest;
@@ -18,10 +19,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products_creator = Product::with('createdBy')->latest()->get();
-
+        $products = Product::with(['seller' , 'category'])->latest()->get();
+  
+        
         return Inertia::render("Admin/Home/Products" , [
-            "products_creator" => $products_creator,
+
+            "products" => $products,
+
         ]);
     }
 
@@ -30,11 +34,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = ProductCategories::latest()->get();
+        $categories = Category::latest()->get();
 
-        
-
-        
         return Inertia::render("Admin/Home/CreateProduct" , [
             'categories' => $categories,
         ]);
@@ -53,7 +54,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric|min:0',
                 'description' => 'required|string|max:10000',
                 'specifications' => 'required|array',
-                'category' => 'required|string|max:255',
+                'category_id' => 'required|integer',
                 'stock' => 'required|integer|min:0',
                 'tags' => 'required|array', // Ensure `tags` is an array
                 'tags.*' => 'string', // Validate each tag as a string
@@ -68,18 +69,17 @@ class ProductController extends Controller
                 'discount_end' => 'nullable|date|after_or_equal:discount_start',
                 'price_after_discount' => 'nullable|numeric|min:0',
                 'is_active' => 'required',
-    
-    
+                
             ]);
             
-    
+            $params['seller_id'] = Auth::user()->id;
             $imgs_paths = [];
             foreach(HandleFilesController::uploadFiles($request->file('images_paths') , "product") as $x){
-                array_push($imgs_paths , Storage::url($x));
+                array_push($imgs_paths , $x);
             }
 
-            $vid_path = Storage::url(HandleFilesController::uploadFiles($request->file('video_url') , "product"));
-            $thumb_path = Storage::url(HandleFilesController::uploadFiles($request->file('thumbnail') , "product"));
+            $vid_path = HandleFilesController::uploadFiles($request->file('video_url') , "product");
+            $thumb_path = HandleFilesController::uploadFiles($request->file('thumbnail') , "product");
 
             $params['discount']/100;
             
@@ -87,7 +87,9 @@ class ProductController extends Controller
             $params['thumbnail'] = $thumb_path;
             $params['video_url'] = $vid_path;
             $params['created_by'] = Auth::id();
-            Product::create($params);
+            $product = Product::create($params);
+            
+            return redirect()->route('admin.products.index')->with('success', 'Product added successfully!');
 
         } catch(Exception $e){
             dd($e);
@@ -105,7 +107,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        $product = Product::with('createdBy')->where('id' , $product->id)->first();
+        $product = Product::with('seller')->where('seller_id' , $product->id)->first();
         
         return Inertia::render("Admin/Home/Product", [
             'product' => $product,
@@ -136,7 +138,7 @@ class ProductController extends Controller
     {
         try{
             $product->delete();
-            return redirect()->route('admin.products.index')->with(['message' => 'Prodect deleted succefuly']);
+            return redirect()->route('admin.products.index')->with('success' , 'Product deleted successfully!');
         } catch(Exception $e){
             dd($e);
         }

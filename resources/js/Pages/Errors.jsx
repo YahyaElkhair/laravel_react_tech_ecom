@@ -110,8 +110,19 @@ function Errors({ status , message }) {
                     </Link>
                 </div>
             }
+            
 
-
+            {/* 302 */}
+            {status === 302 &&
+            
+                <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+                    <h1 className="text-9xl font-bold text-red-500">302</h1>
+                    <h2 className="mt-4 text-2xl font-semibold">You are not unauthenticated !!</h2>
+                    <Link href={route('shop.index')} className="mt-6 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                        Go Back
+                    </Link>
+                </div>
+            }
         </>
 
     );

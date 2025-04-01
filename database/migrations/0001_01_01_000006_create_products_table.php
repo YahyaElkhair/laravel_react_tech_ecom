@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("seller_id")->constrained('sellers')->onDelete('cascade');
+            $table->foreignId("seller_id")->constrained('users')->onDelete('cascade');
             $table->foreignId("category_id")->constrained('categories')->onDelete('cascade');
             $table->string('name');
             $table->decimal('price', 10, 2); // Product price
@@ -26,7 +26,6 @@ return new class extends Migration
             $table->json('images_paths')->nullable(); // JSON array for image paths
             $table->string('video_url')->nullable(); // Video URL
             $table->string('thumbnail')->nullable(); // Thumbnail image path
-            $table->string('category'); // Product category
             $table->integer('stock'); // Available stock
             $table->string('is_active')->default('active'); // Whether the product is active
             $table->json('specifications')->nullable(); // JSON for product specifications
@@ -34,7 +33,6 @@ return new class extends Migration
             $table->integer('review_count')->default(0); // Number of reviews
             $table->integer('views')->default(0); // Number of views
             $table->integer('favorite_count')->default(0); // Number of times added to favorites
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade'); // Seller who created the product
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

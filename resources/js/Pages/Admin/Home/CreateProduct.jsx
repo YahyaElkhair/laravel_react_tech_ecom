@@ -1,10 +1,11 @@
 import AdminLayout from "../Layout/AdminLayout";
 import 'CSS/AdminStyling/Table.css';
 import 'CSS/AdminStyling/CreateForm.css';
-import { Head, useForm  } from '@inertiajs/react';
+import { Head, useForm} from '@inertiajs/react';
 import { useEffect, useState} from 'react';
 
 function CreateProduct({categories}){
+
 
 
 
@@ -13,7 +14,7 @@ function CreateProduct({categories}){
         price:null,
         description:null,
         specifications:[],
-        category:null,
+        category_id:categories[0].id,
         stock:null,
         tags:[],
         images_paths:[],
@@ -28,13 +29,17 @@ function CreateProduct({categories}){
     const handleRadioChange = (e) => {
         setData('is_active' , e.target.value);
     };
+
     const handleFormSubmit = (e) =>{
         e.preventDefault();
-
-
         post(route('admin.products.store'));
+        console.log(data.images_paths);
+
     }
 
+    useEffect(() => {
+
+    }, [data.images_paths])
 
 
     // get categories data
@@ -43,7 +48,7 @@ function CreateProduct({categories}){
     if(categories.length > 0){
         cat_list = categories.map((c , i) => {
             return(
-                <option value={c.name} key={`${c.name}-${i}`}>
+                <option value={c.name} id={c.id} key={`${c.name}-${i}`}>
                     {c.name}
                 </option>
             )
@@ -102,7 +107,7 @@ function CreateProduct({categories}){
 
 
         selected_cat_data.map((c) => {
-            let cat_sp = JSON.parse(c.spesifications);
+            let cat_sp = JSON.parse(c.specifications);
             setSpecifications([
                 cat_sp.map((s) =>{
                     return(
@@ -116,13 +121,26 @@ function CreateProduct({categories}){
 
         });
 
+        setData('category_id',selected_cat_data[0].id);
 
     }
 
 
 
 
+    const handleImagesUpload = (e) => {
+        const file = e.target.files;
 
+        setData(prevData => {
+            let prevImages = [...prevData.images_paths];
+
+
+            prevImages.push(file[0]);
+
+            return {...prevData , images_paths: prevImages}
+        });
+
+    }
 
 
 
@@ -132,9 +150,10 @@ function CreateProduct({categories}){
             <Head title="Create product"/>
 
             <div className="dash-content">
-                <h1>Create new produtc</h1>
+                <h2 className="text-2xl text-center font-bold text-gray-800 mt-5 mb-5">Create new product</h2>
                 <div className="form-container">
                     <form onSubmit={handleFormSubmit} encType="multipart/form-data">
+
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input type="text" id="name" name="name" placeholder="Enter product name" required onChange={(e) => setData('name', e.target.value)} />
@@ -151,7 +170,7 @@ function CreateProduct({categories}){
 
                         <div className="form-group">
                             <label htmlFor="category">Category</label>
-                            <select id="category" name="category" value={category} required onChange={(e) => { setData('category', e.target.value) ; setCategory(e.target.value) } }>
+                            <select id="category" name="category" value={category} required onChange={(e) => { setData('category_id', e.target.id) ; setCategory(e.target.value) } }>
                                 <option value="" disabled >Select a category</option>
                                 {cat_list}
                             </select>
@@ -176,7 +195,7 @@ function CreateProduct({categories}){
                         </div>
                         <div className="form-group">
                             <label htmlFor="images_paths">Images</label>
-                            <input type="file" id="images_paths" name="images_paths[]" multiple accept=".png,.jpg,.jpeg"  required  onChange={(e) => setData('images_paths', e.target.files)}/>
+                            <input type="file" id="images_paths" name="images_paths" multiple accept=".png,.jpg,.jpeg"  required  onChange={handleImagesUpload} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="thumbnail">Thumbnail</label>

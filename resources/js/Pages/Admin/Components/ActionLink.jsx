@@ -7,7 +7,6 @@ function ActionLink({type , link_text , link_to , link_args}){
     let httpMethod = "";
 
 
-
     switch(type){
         case 'infos' :
             classname = 'action-btn action-btn-infos ';

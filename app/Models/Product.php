@@ -42,7 +42,7 @@ class Product extends Model
 
     public function seller()
     {
-        return $this->belongsTo(Seller::class);
+        return $this->belongsTo(User::class);
     }
     public function category()
     {
