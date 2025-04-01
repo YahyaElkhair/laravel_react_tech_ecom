@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->json('spesifications');
-            $table->timestamps();
+        Schema::table('categories', function (Blueprint $table) {
+            $table->json("specifications")->nullable()->after("description");
         });
     }
 
@@ -25,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_categories');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropColumn("specifications");
+        });
+        
     }
 };

@@ -3,7 +3,7 @@ import logo from 'PUBLIC/images/logo.png';
 import profile from 'PUBLIC/images/profile.jpg';
 import React, { useEffect, useState } from 'react';
 import 'CSS/AdminStyling/AdminDashboard.css';
-import AddBtn from "../Components/AddBtn";
+import FlashMessage from '@/Components/FlashMessage';
 
 function AdminLayout({children , isEnableSearch, search_placeholder}){
 
@@ -80,7 +80,7 @@ function AdminLayout({children , isEnableSearch, search_placeholder}){
                         </li>
 
                         <li>
-                            <Link href={route('admin.productsCategories.index')}>
+                            <Link href={route('admin.categories.index')}>
                                 <i className="uil uil-list-ul"></i><span className="link-name">Categories</span>
                             </Link>
                         </li>
@@ -128,7 +128,10 @@ function AdminLayout({children , isEnableSearch, search_placeholder}){
                     <img src={profile} alt="profile avatar" />
 
                 </div>
+
+                
                 {children}
+                <FlashMessage/>
 
             </section>
 

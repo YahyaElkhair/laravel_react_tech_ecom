@@ -59,10 +59,17 @@ class HandleInertiaRequests extends Middleware
             
             // Flash messages
             'flash' => [
-                'success' => fn () => $request->session()->get('success'),
-                'error' => fn () => $request->session()->get('error'),
-                'warning' => fn () => $request->session()->get('warning'),
-                'info' => fn () => $request->session()->get('info'),
+                // Returns the first non-null message it finds
+                'message' => fn () => $request->session()->get('success') 
+                               ?? $request->session()->get('error')
+                               ?? $request->session()->get('warning')
+                               ?? $request->session()->get('info'),
+
+                // Returns the first non-null type it finds
+                'type' => fn () => $request->session()->has('success') ? 'success'
+                          : ($request->session()->has('error') ? 'error'
+                          : ($request->session()->has('warning') ? 'warning' 
+                          : ($request->session()->has('info') ? 'info' : null)))
             ],
             
             // Feature flags

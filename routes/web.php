@@ -4,8 +4,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SocialiteController;
@@ -59,7 +59,7 @@ Route::middleware(['auth' , 'role:admin'])->group(function () {
         });
         
         // products categories
-        Route::resource('productsCategories' , ProductCategoriesController::class);
+        Route::resource('categories' , CategoryController::class);
 
         //Orders
         Route::resource('orders' , OrderController::class);

@@ -10,7 +10,7 @@ function ActionLink({type , link_text , link_to , link_args}){
 
     switch(type){
         case 'infos' :
-            classname = 'action-btn action-btn-infos';
+            classname = 'action-btn action-btn-infos ';
             httpMethod = 'get';
         break;
 

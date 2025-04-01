@@ -31,6 +31,10 @@ module.exports = {
             },
         },
         extend: {
+            boxShadow: {
+                'custom': '0 2px 8px 0 rgba(99, 99, 99, 0.2)'
+            },
+            
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },

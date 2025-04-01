@@ -9,18 +9,18 @@ import { Head, Link, useForm  } from '@inertiajs/react';
 
 
 
-function EditPC({pc}){
+function EditCategory({category}){
     const {data, setData, put, processing, errors, reset } = useForm({
-        id: pc.id,
-        name: pc.name,
-        description: pc.description,
-        spesifications: JSON.parse(pc.spesifications) ,
+        id: category.id,
+        name: category.name,
+        description: category.description,
+        specifications: JSON.parse(category.specifications),
     });
 
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        put(route('admin.productsCategories.update', pc), {
+        put(route('admin.categories.update', category.id), {
             onSuccess: () => reset(),
         });
 
@@ -41,8 +41,8 @@ function EditPC({pc}){
                         <input type="text" id="description" name="description" value={data.description} placeholder="Enter categorie description" required onChange={(e) => setData('description', e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="spesifications">Specifications</label>
-                        <input type="text" id="spesifications" name="spesifications" value={data.spesifications.join(",")} placeholder="Enter categorie specifications (comma separated)" required onChange={(e) => setData('spesifications', e.target.value.split(',')) } /> 
+                        <label htmlFor="specifications">Specifications</label>
+                        <input type="text" id="specifications" name="specifications" value={data.specifications.join(",")} placeholder="Enter categorie specifications (comma separated)" required onChange={(e) => setData('spesifications', e.target.value.split(',')) } /> 
                     </div>
                     <div className="form-actions">
                         <button type="submit" disabled={processing} >Update categorie</button>
@@ -56,4 +56,4 @@ function EditPC({pc}){
 
 }
 
-export default EditPC;
+export default EditCategory;

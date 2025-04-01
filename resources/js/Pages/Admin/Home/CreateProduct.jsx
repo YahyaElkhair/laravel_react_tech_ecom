@@ -38,17 +38,27 @@ function CreateProduct({categories}){
 
 
     // get categories data
+    let cat_list = [];
+    let [category , setCategory] = useState(null);
+    if(categories.length > 0){
+        cat_list = categories.map((c , i) => {
+            return(
+                <option value={c.name} key={`${c.name}-${i}`}>
+                    {c.name}
+                </option>
+            )
+        });
 
-    let cat_list = categories.map((c , i) => {
-        return(
-            <option value={c.name} key={`${c.name}-${i}`}>
-                {c.name}
-            </option>
-        )
-    });
+        [category , setCategory] = useState(categories[0].name);
+
+        useEffect(() =>{
+            handleCatSelect(category);
+        } , [category]);
+
+    }
 
 
-    const [category , setCategory] = useState(categories[0].name);
+
     const [specifications , setSpecifications] = useState([]);
 
 
@@ -110,9 +120,7 @@ function CreateProduct({categories}){
     }
 
 
-    useEffect(() =>{
-        handleCatSelect(category);
-    } , [category]);
+
 
 
 

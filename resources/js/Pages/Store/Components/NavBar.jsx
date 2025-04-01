@@ -52,7 +52,7 @@ function NavBar(){
 
 
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: 'zizok396@gmail.com',
+        email: 'admin@admin',
         password: 'azazazaz',
         remember: false,
     });

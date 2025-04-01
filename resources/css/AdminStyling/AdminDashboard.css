@@ -218,6 +218,8 @@ body.dark .switch:before{
     width: calc(100% - 250px);
     padding: 10px 14px;
     transition: var(--tran-05);
+
+    
 }
 nav.close ~ .dashboard{
     left: 73px;

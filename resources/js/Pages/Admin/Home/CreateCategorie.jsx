@@ -8,14 +8,13 @@ function CreateCategorie () {
     const {data, setData, post, processing, errors, reset } = useForm({
         name:'',
         description:'',
-        spesifications:[],
+        specifications:[],
     });
 
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(data.spesifications);
-        post(route('admin.productsCategories.store'));
+        post(route('admin.categories.store'));
 
     }
 
@@ -34,8 +33,8 @@ function CreateCategorie () {
                         <input type="text" id="description" name="description" placeholder="Enter categorie description" required onChange={(e) => setData('description', e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="spesifications">Specifications</label>
-                        <input type="text" id="spesifications" name="spesifications" placeholder="Enter categorie specifications (comma separated)" required onChange={(e) => setData('spesifications', e.target.value.split(',')) } /> 
+                        <label htmlFor="specifications">Specifications</label>
+                        <input type="text" id="specifications" name="specifications" placeholder="Enter categorie specifications (comma separated)" required onChange={(e) => setData('specifications', e.target.value.split(',')) } /> 
                     </div>
                     <div className="form-actions">
                         <button type="submit" disabled={processing} >Save categorie</button>
