@@ -10,5 +10,4 @@
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
 *.jsx linguist-language=React
-*.js linguist-language=JavaScript
-*.tsx linguist-language=TypeScript
+
