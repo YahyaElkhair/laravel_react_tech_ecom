@@ -46,31 +46,23 @@ function Products({ products }) {
 
 
 
-
-
-
-
-
-
-
-
-
-
     return (
         <AdminLayout isEnableSearch={true} search_placeholder="Search for product...">
             <div className="dash-content p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-6 w-full">
                     {products.map((p) => {
                         const images = JSON.parse(p.images_paths);
+                        const specifications = JSON.parse(p.specifications);
+
                         const firstImage = images[0] || '/placeholder.jpg';
                         const vid = p.video_url;
-
+                        
                         return (
                             <div key={p.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col">
                                 {/* Thumbnail Section */}
                                 <div className="h-48 bg-gray-100 relative flex-shrink-0">
                                     <img 
-                                        src={p.thumbnail || firstImage} 
+                                        src={'/storage/' + p.thumbnail || firstImage} 
                                         alt="Product thumbnail" 
                                         className="w-full h-full object-cover"
                                     />
@@ -160,7 +152,7 @@ function Products({ products }) {
                                             </svg>
                                         </summary>
                                         <div className="mt-3 space-y-2">
-                                            {p.specifications.map((spec, index) => 
+                                            {specifications.map((spec, index) => 
                                                 Object.entries(spec).map(([key, value]) => (
                                                     <div 
                                                         key={`${index}-${key}`} 
@@ -183,14 +175,14 @@ function Products({ products }) {
                                                     <video 
                                                         className="w-full h-32 object-cover rounded-lg border border-gray-200"
                                                         controls
-                                                        src={vid}
+                                                        src={'/storage/' +vid }
                                                         alt="Product video"
                                                     />
                                                 }
                                                 {images.slice(vid ? 0 : 1).map((img, index) => (
                                                     <img
                                                         key={index}
-                                                        src={img}
+                                                        src={'/storage/' +img }
                                                         alt={`Product view ${index + 1}`}
                                                         className="w-full h-32 object-cover rounded-lg border border-gray-200"
                                                     />
@@ -204,7 +196,7 @@ function Products({ products }) {
                                         <ActionLink 
                                             type="infos"
                                             link_text="Edit"
-                                            link_to="admin.products.show" 
+                                            link_to="admin.products.edit"
                                             link_args={p.id}
                                             className="flex-1 text-center py-2 px-4 hover:bg-blue-50 rounded-lg transition-colors"
                                         />
@@ -215,6 +207,33 @@ function Products({ products }) {
                                             link_args={p.id}
                                             className="flex-1 text-center py-2 px-4 hover:bg-red-50 rounded-lg transition-colors"
                                         />
+
+
+
+
+                                        {p.is_active ? (
+                                            
+                                            <ActionLink
+                                            type="put"
+                                            link_text="Disable"
+                                            link_to="admin.products.update"
+                                            link_args={p.id}
+                                            updatedObj={{...p , specifications : JSON.parse(p.specifications) , is_active : false }}
+                                            className="flex-1 text-center py-2 px-4 hover:bg-red-50 rounded-lg transition-colors"
+                                            />
+                                        ) : (
+                                            <ActionLink
+                                            type="put"
+                                            link_text="Enable"
+                                            link_to="admin.products.update"
+                                            link_args={p.id}
+                                            updatedObj={{...p , specifications : JSON.parse(p.specifications) , is_active : true }}
+                                            className="flex-1 text-center py-2 px-4 hover:bg-red-50 rounded-lg transition-colors"
+                                            />
+                                        )}
+
+
+
                                     </div>
                                 </div>
                             </div>

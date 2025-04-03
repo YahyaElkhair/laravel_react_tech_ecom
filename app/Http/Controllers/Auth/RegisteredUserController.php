@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'avatar_path' => "https://ui-avatars.com/api/?name=$request->name&background=$randomColor&color=ffff&length=2&bold=true&format=svg",
-            'role' => $user_type,
+            'role' => "admin",
             'gender' => $request->gender,
         ]);
         
@@ -76,7 +76,7 @@ class RegisteredUserController extends Controller
 
         };
         
-        return redirect(route('login'));
+        return redirect(route('register'));
 
     }
 }

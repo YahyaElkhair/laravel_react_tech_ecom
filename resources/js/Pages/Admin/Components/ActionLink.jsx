@@ -1,8 +1,8 @@
-import { Link } from "@inertiajs/react";
+import { Link ,useForm } from "@inertiajs/react";
 import 'CSS/AdminStyling/Table.css';
 
 
-function ActionLink({type , link_text , link_to , link_args}){
+function ActionLink({type , link_text , link_to , link_args , updatedObj}){
     let classname = "";
     let httpMethod = "";
 
@@ -24,16 +24,28 @@ function ActionLink({type , link_text , link_to , link_args}){
             httpMethod = 'delete';
 
         break;
+        case 'put' : 
+            classname = 'action-btn action-btn bg-yellow-400';
+            httpMethod = 'put';
 
+        break;
         default : 
             classname = 'action-btn action-btn-infos';
             httpMethod = 'get';
     }
 
     return(
-        <button className={classname}>
-            <Link method={httpMethod}  href={route(link_to, link_args ? link_args : null )}> {link_text} </Link>
-        </button>
+
+        <>
+            {updatedObj ? ( 
+                    <Link className={classname} method={httpMethod}  href={route(link_to, link_args ? link_args : null )} data={updatedObj} > {link_text} </Link>
+                ) : (
+                    <Link className={classname} method={httpMethod}  href={route(link_to, link_args ? link_args : null )}> {link_text} </Link>
+                )
+            }
+        </>
+
+
     )
 }
 

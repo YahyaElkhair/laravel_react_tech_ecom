@@ -4,28 +4,30 @@ import 'CSS/AdminStyling/CreateForm.css';
 import { Head, useForm} from '@inertiajs/react';
 import { useEffect, useState} from 'react';
 
-function CreateProduct({categories}){
+function EditProduct({categories , product}){
 
+    
 
-
-
-    const {data, setData, post, processing, errors, reset } = useForm({
-        name:null,
-        price:null,
-        description:null,
-        specifications:[],
-        category_id:categories[0].id,
-        stock:null,
-        tags:[],
-        images_paths:[],
-        thumbnail:null,
-        video_url:null,
-        discount:null,
-        discount_start:null,
-        discount_end:null,
-        price_after_discount:null,
-        is_active:true,
+    const {data, setData, put, processing, errors, reset } = useForm({
+        name:product.name,
+        price:product.price,
+        description:product.description,
+        specifications:product.specifications,
+        category_id:product.category_id,
+        stock:product.stock,
+        tags:product.tags,
+        images_paths:product.images_paths,
+        thumbnail:product.thumbnail,
+        video_url:product.video_url ? product.video_url: null,
+        discount:product.discount,
+        discount_start:product.discount_start,
+        discount_end:product.discount_end,
+        price_after_discount:product.price_after_discount,
+        is_active:product.is_active,
     });
+    
+
+
     const handleRadioChange = (e) => {
         setData('is_active' , e.target.value);
     };
@@ -56,8 +58,6 @@ function CreateProduct({categories}){
         } , [category]);
 
     }
-
-
 
     const [specifications , setSpecifications] = useState([]);
 
@@ -108,7 +108,7 @@ function CreateProduct({categories}){
                     return(
                         <>
                             <label htmlFor={s}> {s} : </label>
-                            <input type="text" name={s} id={s} onBlur={handleSPInpChange} />
+                            <input type="text" value={JSON.parse(data.specifications).find(sp => sp[s])?.[s]}  name={s} id={s} onBlur={handleSPInpChange} />
                         </>
                     )
                 })
@@ -151,21 +151,21 @@ function CreateProduct({categories}){
 
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter product name" required onChange={(e) => setData('name', e.target.value)} />
+                            <input type="text" id="name" name="name" value={data.name} placeholder="Enter product name" required onChange={(e) => setData('name', e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="price">Price</label>
-                            <input type="number" id="price" name="price" placeholder="Enter product price" step="1" required onChange={(e) => setData('price', e.target.value)} />
+                            <input type="number" id="price" name="price" value={data.price} placeholder="Enter product price" step="1" required onChange={(e) => setData('price', e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
-                            <textarea id="description" name="description" placeholder="Enter product description" rows="4" required  onChange={(e) => setData('description', e.target.value)}></textarea>
+                            <textarea id="description" name="description" value={data.description} placeholder="Enter product description" rows="4" required  onChange={(e) => setData('description', e.target.value)}></textarea>
                         </div>
 
 
                         <div className="form-group">
                             <label htmlFor="category">Category</label>
-                            <select id="category" name="category" value={category} required onChange={(e) => { setData('category_id', e.target.id) ; setCategory(e.target.value) } }>
+                            <select id="category" name="category" value={categories.find(c => c.id === data.category_id).name}  required onChange={(e) => { setData('category_id', e.target.id) ; setCategory(e.target.value) } }>
                                 <option value="" disabled >Select a category</option>
                                 {cat_list}
                             </select>
@@ -173,7 +173,7 @@ function CreateProduct({categories}){
 
 
                         <div className="form-group">
-                            <label htmlFor="specifications">Specifications</label>
+                            <label htmlFor="specifications" >Specifications</label>
                             <div className="specifications_container">
                                 {specifications}
                             </div>
@@ -182,11 +182,11 @@ function CreateProduct({categories}){
 
                         <div className="form-group">
                             <label htmlFor="stock">Stock</label>
-                            <input type="number" id="stock" name="stock" placeholder="Enter stock quantity" required  onChange={(e) => setData('stock', e.target.value)}/>
+                            <input type="number" id="stock" name="stock" value={data.stock} placeholder="Enter stock quantity" required  onChange={(e) => setData('stock', e.target.value)}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="tags">Tags</label>
-                            <input type="text" id="tags" name="tags" placeholder="Enter tags (comma separated)" required onChange={(e) => setData('tags', e.target.value.split(',')) } /> 
+                            <input type="text" id="tags" name="tags" value={data.tags} placeholder="Enter tags (comma separated)" required onChange={(e) => setData('tags', e.target.value.split(',')) } /> 
                         </div>
                         <div className="form-group">
                             <label htmlFor="images_paths">Images</label>
@@ -202,28 +202,28 @@ function CreateProduct({categories}){
                         </div>
                         <div className="form-group">
                             <label htmlFor="discount">Discount (%)</label>
-                            <input type="number" id="discount" name="discount" placeholder="Enter discount %" step="0.01" onChange={(e) => setData('discount', e.target.value)} />
+                            <input type="number" id="discount" name="discount" value={data.discount} placeholder="Enter discount %" step="0.01" onChange={(e) => setData('discount', e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="discount_start">Discount Start</label>
-                            <input type="datetime-local" id="discount_start" name="discount_start" onChange={(e) => setData('discount_start', e.target.value)} />
+                            <input type="datetime-local" id="discount_start" name="discount_start" value={data.discount_start} onChange={(e) => setData('discount_start', e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="discount_end">Discount End</label>
-                            <input type="datetime-local" id="discount_end" name="discount_end" onChange={(e) => setData('discount_end', e.target.value)} />
+                            <input type="datetime-local" id="discount_end" name="discount_end" value={data.discount_end} onChange={(e) => setData('discount_end', e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="price_after_discount">Price After Discount</label>
-                            <input type="number" id="price_after_discount" name="price_after_discount" placeholder="Auto-calculated" readOnly onChange={(e) => setData('price_after_discount', e.target.value)} />
+                            <input type="number" id="price_after_discount" name="price_after_discount" value={data.price_after_discount} placeholder="Auto-calculated" readOnly onChange={(e) => setData('price_after_discount', e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label>Active</label>
                             <div className="radio-container">
                                 <label htmlFor="yes">Yes</label>
-                                <input type="radio" name="is_active" id="yes" value="true" checked={data.is_active === true} onChange={handleRadioChange} />
+                                <input type="radio" name="is_active" id="yes" value="true" checked={data.is_active === 1} onChange={handleRadioChange} />
 
                                 <label htmlFor="no">No</label>
-                                <input type="radio" name="is_active" id="no" value="false" checked={data.is_active === false} onChange={handleRadioChange} />
+                                <input type="radio" name="is_active" id="no" value="false" checked={data.is_active === 0} onChange={handleRadioChange} />
                             </div>
                         </div>
                         <div className="form-actions">
@@ -239,4 +239,4 @@ function CreateProduct({categories}){
     )
 }
 
-export default CreateProduct;
+export default EditProduct;

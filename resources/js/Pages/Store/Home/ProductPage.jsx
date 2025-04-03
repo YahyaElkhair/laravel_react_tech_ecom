@@ -32,11 +32,11 @@ function ProductPage({product}) {
                         </div>
 
                         <div className='prod_rating'>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star-half'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star-half'></i>
                         </div>
 
                         <div>
@@ -52,7 +52,7 @@ function ProductPage({product}) {
                             <i className='bx bxs-heart add_fav_btn'  ></i>
 
                             <button className='add_cart_btn'>
-                                <i class='bx bxs-cart-add'></i>
+                                <i className='bx bxs-cart-add'></i>
                                 Add to cart
                                 
                             </button>

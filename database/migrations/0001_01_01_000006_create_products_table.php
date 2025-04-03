@@ -21,13 +21,13 @@ return new class extends Migration
             $table->timestamp('discount_start')->nullable(); // Discount start date
             $table->timestamp('discount_end')->nullable(); // Discount end date
             $table->decimal('price_after_discount', 10, 2)->nullable(); // Final price after discount
-            $table->json('tags')->nullable(); // JSON array of tags
-            $table->string('description')->nullable(); // Product description
+            $table->string('tags')->nullable();
+            $table->string('description')->nullable();
             $table->json('images_paths')->nullable(); // JSON array for image paths
             $table->string('video_url')->nullable(); // Video URL
             $table->string('thumbnail')->nullable(); // Thumbnail image path
             $table->integer('stock'); // Available stock
-            $table->string('is_active')->default('active'); // Whether the product is active
+            $table->boolean( 'is_active')->default(true);
             $table->json('specifications')->nullable(); // JSON for product specifications
             $table->float('rating', 3, 2)->default(0); // Average rating (e.g., 4.5/5)
             $table->integer('review_count')->default(0); // Number of reviews

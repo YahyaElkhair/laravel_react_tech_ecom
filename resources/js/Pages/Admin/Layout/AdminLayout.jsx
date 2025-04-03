@@ -52,7 +52,7 @@ function AdminLayout({children , isEnableSearch, search_placeholder}){
                 <div className="menu-items">
                     
                     <ul className="nav-links">
-                        <i class='bx bx-menu sidebar-toggle' onClick={handlNavicon}></i>
+                        <i className='bx bx-menu sidebar-toggle' onClick={handlNavicon}></i>
 
 
                         <li>

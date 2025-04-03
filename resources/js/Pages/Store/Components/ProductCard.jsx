@@ -29,12 +29,12 @@ function ProductCard(){
                     </div>
 
                     
-                    <div class="product-links">
+                    <div className="product-links">
                         <a href="">
-                            <i class='bx bxs-heart' ></i>
+                            <i className='bx bxs-heart' ></i>
                         </a>
                         <a href="">
-                            <i class='bx bxs-cart-add'></i>
+                            <i className='bx bxs-cart-add'></i>
                         </a>
                     </div>
                 </div>
